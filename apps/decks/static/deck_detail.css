@@ -1,0 +1,124 @@
+div{
+/*	border:1px solid red;
+	margin-bottom:10px;*/
+}
+
+#header{
+	display:flex;
+	height:50px;
+	border-bottom:2px solid #456990;
+	margin-bottom:50px;
+	align-items:center;
+	justify-content: space-between;
+	padding:0px 20px;
+}
+html{
+	font-family: sans-serif;
+	background-color: #114B5F;
+}
+
+
+h1{
+	display:inline-block;
+	color:#F45B69;
+}
+
+a{
+	float:right;
+	color:#F45B69;
+	text-decoration: none;
+	margin:0px 10px;
+}
+
+table{
+	width:80%;
+	margin:0px auto;
+	text-align:center;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+.labeler{
+	width:150px;
+}
+
+#type_line{
+	margin-bottom:30px;
+}
+
+#id_any_text, #id_card_name, #id_type_line{
+	width: 300px;
+}
+
+
+button {
+	background: #276B4D;
+	background-image: -webkit-linear-gradient(top, #276B4D, #276B4D);
+	background-image: -moz-linear-gradient(top, #276B4D, #276B4D);
+	background-image: -ms-linear-gradient(top, #276B4D, #276B4D);
+	background-image: -o-linear-gradient(top, #276B4D, #276B4D);
+	background-image: linear-gradient(to bottom, #276B4D, #276B4D);
+	-webkit-border-radius: 22;
+	-moz-border-radius: 22;
+	border-radius: 22px;
+	font-family: Arial;
+	color: #e4fde1;
+	font-size: 16px;
+	padding: 5px 12px 5px 12px;
+	text-decoration: none;
+}
+
+button:hover {
+	background: #f45b69;
+	background-image: -webkit-linear-gradient(top, #f45b69, #f45b69);
+	background-image: -moz-linear-gradient(top, #f45b69, #f45b69);
+	background-image: -ms-linear-gradient(top, #f45b69, #f45b69);
+	background-image: -o-linear-gradient(top, #f45b69, #f45b69);
+	background-image: linear-gradient(to bottom, #f45b69, #f45b69);
+	text-decoration: none;
+}
+
+@media only screen and (max-width:767px){
+	#wrapper{
+		width:90%;
+		margin:0px auto;
+		color:#e4fde1;
+	}
+	.labeler-div{
+		align-items:center;
+	}
+}
+
+@media only screen and (min-width:768px){
+	#wrapper{
+		width:70%;
+		margin:0px auto;
+		color:#E4FDE1;
+	}
+	#id_colors,#id_colors_identity, #id_rarity{
+		display:flex;
+	}
+
+	.labeler-div{
+		display:flex;
+		align-items:center;
+	}
+}
+
+@media only screen and (min-width:1024px){
+	#wrapper{
+		width:70%;
+		margin:0px auto;
+		color:#e4fde1;
+	}
+	#id_colors,#id_colors_identity, #id_rarity{
+		display:flex;
+	}
+	.labeler-div{
+		display:flex;
+		align-items:center;
+	}
+
+}

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../../static/reset.css" rel="stylesheet"/>
+	<link href="../../static/decks.css" rel="stylesheet"/>
+
+	<title>
+	</title>
+</head>
+<body>
+	<div id="header">
+		<h1><a href="/">MAGIC</a></h1>
+		<a id="logout" href="/login/logout/">LOGOUT</a>
+	</div>
+	<div id="wrapper">
+		<div>
+			<form action="/decks/add_deck/" method="post" id=former>
+				{% csrf_token %}
+				{{form}}
+				<button type="submit" id="btn">CREATE DECK</button>
+			</form>
+		</div>
+		<div>
+			<table>
+				<tr>
+					<th>Deck Name</th>
+					<th>Deck Desc</th>
+				</tr>
+				{% for d in decks%}
+					<tr>
+						<td><a href="/decks/deck_detail/{{d.id}}">{{d.name}}</a></td>
+						<td>{{d.desc}}</td>
+
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<div id="naver">
+	</div>
+
+</body>
+</html>

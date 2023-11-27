@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../../static/reset.css" rel="stylesheet"/>
+	<link href="../../static/cards.css" rel="stylesheet"/>
+
+	<title>
+	</title>
+</head>
+<body>
+	<div id="header">
+		<h1><a href="/">MAGIC</a></h1>
+		{% if logged_in %}
+			<div>
+				<a href="/login/logout/">LOGOUT</a>
+				<a href="/decks/">DECKS</a>
+				
+			</div>
+		{% else %}
+			<div>
+				<a href="/login/">LOGIN</a>
+				<a href="/login/register/">REGISTER</a>
+			</div>
+		{% endif %}
+	</div>
+	<div id="wrapper">
+		{% for c in cards %}
+			<a href="/card/{{c.id}}"><img src="{{c.image_normal}}"/></a>
+		{% endfor %}
+	</div>
+	<div id="naver">
+		{% if page_one %}
+			|<a href="/cards/{{next_page}}/">Next</a>
+		{% else %}
+			{% if last_page %}
+
+				<a href="/cards/{{prev_page}}/">Prev</a>
+			{% else %}
+				<a href="/cards/{{prev_page}}/">Prev</a>|<a href="/cards/{{next_page}}/">Next</a>
+			{% endif %}
+		{% endif %}
+	</div>
+
+</body>
+</html>

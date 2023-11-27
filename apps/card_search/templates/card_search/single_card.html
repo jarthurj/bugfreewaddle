@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link href="../../static/reset.css" rel="stylesheet"/>
+	<link href="../../static/single_card.css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="header">
+		<h1><a href="/">MAGIC</a></h1>
+		{% if logged_in %}
+			<div>
+				<a href="/login/logout/">LOGOUT</a>
+				<a href="/decks/">DECKS</a>
+
+			</div>
+		{% else %}
+			<div>
+				<a href="/login/">LOGIN</a>
+				<a href="/login/register/">REGISTER</a>
+			</div>
+		{% endif %}
+	</div>
+	<div id="wrapper">
+		<div id="card_img">
+			<img src="{{card.image_normal}}"/></a>
+		</div>
+		<div id="card_info">
+			<div>
+				<p>{{card.name}}</p>
+				<p>{{card.type_line}}</p>
+				<p>{{card.oracle_text}}</p>
+			</div>
+			<div id="legals">
+				{% for l in card.legality.all %}
+					{% if l.legality == "legal" %}
+						<p class="game">{{l.game_type.game_type}} <span id="legal">LEGAL</p>
+					{% endif %}
+					{% if l.legality == "not_legal" %}
+						<p class="game">{{l.game_type.game_type}} <span id="not_legal">NOT LEGAL</span></p>
+					{% endif %}
+					{% if l.legality == "restricted" %}
+						<p class="game">{{l.game_type.game_type}} <span id="restricted">RESTRICTED</span></p>
+					{% endif %}
+					{% if l.legality == "banned" %}
+						<p class="game">{{l.game_type.game_type}} <span id="not_legal">BANNED</span></p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div id="prints">
+			<h2>Other Printings</h2>
+			<ul>
+			{% for c in printings %}
+				{% if c.id == card.id %}
+				{%else%}
+					<li><a href="/card/{{c.id}}">{{c.card_set.name}}</a></li>
+				{% endif %}
+			{% endfor %}
+			<a href="/all_prints/{{card.id}}">See All Printings</a>
+			</ul>
+			<div>
+				<form action="/decks/add_card/" method="post">
+					{% csrf_token %}
+					<label for="deck_id">Deck:</label>
+					<select name="deck_id">
+						{% for d in decks %}
+							<option value="{{d.id}}">{{d.name}}</option>
+						{% endfor %}
+					</select>
+					<label for="quantity">Quantity:</label>
+					<input type="number" name="quantity" min="1"/>
+					<input type="hidden" value="{{card.id}}" name="card_id" id="card_id"/>
+					<button type="submit" id="btn">ADD TO DECK</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

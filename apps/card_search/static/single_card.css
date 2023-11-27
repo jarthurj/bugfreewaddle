@@ -1,0 +1,117 @@
+div{
+/*	border:1px solid red;*/
+}
+
+
+#header{
+	display:flex;
+	height:50px;
+	border-bottom:2px solid #456990;
+	margin-bottom:50px;
+	align-items:center;
+	justify-content: space-between;
+	padding:0px 20px;
+}
+html{
+	font-family: sans-serif;
+	background-color: #114B5F;
+}
+
+h1{
+	display:inline-block;
+	color:#F45B69;
+}
+
+#login{
+	float:right;
+	color:#F45B69;
+	text-decoration: none;
+}
+
+
+#wrapper{
+	margin:0px auto;
+	width:90%;
+	display:flex;
+	justify-content: space-around;
+	color:#e4fde1;
+}
+
+#legal{
+	color:green;
+}
+#not_legal{
+	color:red;
+}
+
+#card_info{
+	display:flex;
+	flex-direction:column;
+	justify-content: space-between;
+	align-content:space-between;
+	width:40%;
+}
+#card_img{
+	width:35%;
+}
+#legals{
+	display:flex;
+	height:30%;
+	flex-wrap: wrap;
+	flex-direction:column;
+	justify-content:space-around;
+	align-content: space-around;
+}
+
+#prints{
+	width:20%;
+}
+#restricted{
+	color:orange;
+}
+img{
+	width:100%;
+	border-radius: 20px;
+}
+.game{
+	width:10%;
+}
+a{
+	color:#F45B69;
+	text-decoration: none;
+}
+
+li{
+	margin-bottom:10px;
+}
+
+@media only screen and (max-width:767px){
+	#wrapper{
+		margin:0px auto;
+		width:90%;
+		display:flex;
+		flex-flow:column;
+		color:#e4fde1;
+	}
+	#legals{
+		height:100%;
+		width:100%;
+	}
+	#card_info, .game, #prints, #card_img{
+		width:100%;
+	}
+}
+
+
+@media only screen and (min-width:1024px){
+	#wrapper{
+		margin:0px auto;
+		width:90%;
+		height:600px;
+		display:flex;
+		justify-content: space-around;
+		color:#e4fde1;
+
+}
+
+}

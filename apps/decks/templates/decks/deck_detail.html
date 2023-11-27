@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="../../../static/reset.css" rel="stylesheet"/>
+	<link href="../../../static/deck_detail.css" rel="stylesheet"/>
+
+	<title>
+	</title>
+</head>
+<body>
+	<div id="header">
+		<h1><a href="/">MAGIC</a></h1>
+		<a href="/login/logout/">LOGOUT</a>
+	</div>
+	<div id="wrapper">
+		<div>
+
+			<table>
+				<tr>
+					<th>Card Name</th>
+					<th>Quantity</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				{% for c in cards%}
+
+					<tr>
+						<td><a href="/card/{{c.id}}">{{c.name}}</a></td>
+						<td>{{c.quantity}}</td>
+						<td><form action="/decks/card_quantity/" method="post">{% csrf_token %}<input type="number" name="quantity" min="1"/><input type="hidden" value="{{deck_id}}" name="deck_id"/><input type="hidden" value="{{c.id}}" name="card_id"/><button type="submit" id="btn">UPDATE QUANTITY</button></form></td>
+						<td><form action="/decks/delete_card/" method="post">{% csrf_token %}<input type="hidden" value="{{deck_id}}" name="deck_id"/><input type="hidden" value="{{c.id}}" name="card_id"/><input type="hidden" value="{{c.quantity}}" name="quantity"/><button type="submit" id="btn">DELETE</button></form></td>
+					</tr>
+
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<div id="naver">
+	</div>
+
+</body>
+</html>
