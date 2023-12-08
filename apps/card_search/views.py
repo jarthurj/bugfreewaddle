@@ -77,7 +77,11 @@ def search(request):
 				matching_queries.append(query)
 
 		matching_cards = matching_queries[0].intersection(*matching_queries)
-		cache.add('current_query',matching_cards)
+		if cache.get('current_query') == None:
+			cache.add('current_query',matching_cards)
+		else:
+			cache.delete('current_query')
+			cache.add('current_query',matching_cards)
 		# matching_cards_ids = []
 		# for x in matching_cards:
 		# 	matching_cards_ids.append(x.id)
