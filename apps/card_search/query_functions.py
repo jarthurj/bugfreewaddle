@@ -1,6 +1,6 @@
 from .models import *
 
-
+import time
 def name_query(card_name):
 	if card_name == "":
 		return Card.objects.all()
@@ -17,6 +17,7 @@ def color_query(colors_list,exact_or_not):
 			cards_list.append(Color.objects.filter(color=color).first().cards.all())
 		return all_cards.intersection(*cards_list)
 	elif exact_or_not=='exact':
+		time_start = time.time()
 		difference_colors = []
 		for c in ['R','W','B','U','G']:
 			if c not in colors_list:
@@ -32,8 +33,25 @@ def color_query(colors_list,exact_or_not):
 			difference_cards_list.append(Color.objects.filter(color=color).first().cards.all())
 
 		difference_cards = Card.objects.none().union(*difference_cards_list)
+		time_elapsed = time.time() - time_start
+		print('time_elapsed:'+str(time_elapsed))
 		return_cards = cards_list_intersection.difference(cards_list_intersection.intersection(difference_cards))
 		return return_cards
+		# cards_with_exact_color = []
+		# difference_colors = []
+		# for c in ['R','W','B','U','G']:
+		# 	if c not in colors_list:
+		# 		difference_colors.append(c)
+		
+		# for c in colors_list:	
+		# 	q = Card.objects.filter(colors=Color.objects.get(color=c))
+		# 	for d in difference_colors:
+		# 		q = q.exclude(colors=Color.objects.get(color=d))
+		# 	cards_with_exact_color.append(q)
+		# cards_with_exact_color = cards_with_exact_color[0].union(*cards_with_exact_color)
+		# time_elapsed = time.time() - time_start
+		# print('time_elapsed:'+str(time_elapsed))
+		# return cards_with_exact_color
 	elif exact_or_not=='at_most':
 		cards_list = []
 		all_cards = Card.objects.all()

@@ -85,10 +85,10 @@ class CardSearch(forms.Form):
 				initial=EXACT[3],
 				label="")
 
-	colors_identity = forms.MultipleChoiceField(
-				widget=forms.CheckboxSelectMultiple(attrs={'class':'colors_ident'}),
-				choices=COLOR_CHOICES,required=False,
-				label="Color Identity:")
+	# colors_identity = forms.MultipleChoiceField(
+	# 			widget=forms.CheckboxSelectMultiple(attrs={'class':'colors_ident'}),
+	# 			choices=COLOR_CHOICES,required=False,
+	# 			label="Color Identity:")
 
 	rarity = forms.MultipleChoiceField(
 				widget=forms.CheckboxSelectMultiple,

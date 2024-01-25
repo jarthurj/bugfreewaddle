@@ -45,30 +45,35 @@ def search(request):
 		return redirect('index')
 	else:
 		all_cards = Card.objects.all()
-
-		name_cards = name_query(request.POST['card_name'])
-
-		color_cards = Card.objects.none()
-
-		color_cards = color_query(request.POST.getlist('colors'),
-			request.POST['exactly_or_not'])
-
-		color_identity_cards = color_identity_query(request.POST.getlist('colors_identity'))
-
-		rarity_cards = rarity_query(request.POST.getlist('rarity'))
-
-
-		mpt_cards = mpt_query(request.POST['mpt'],
+		if request.POST['card_name'] != '':
+			name_cards = name_query(request.POST['card_name'])
+		else:
+			name_cards = all_cards
+		if len(request.POST.getlist('colors')) > 0:
+			color_cards = color_query(request.POST.getlist('colors'),
+				request.POST['exactly_or_not'])
+		else:
+			color_cards = all_cards
+		if len(request.POST.getlist('rarity')) > 0:
+			rarity_cards = rarity_query(request.POST.getlist('rarity'))
+		else:
+			rarity_cards = all_cards
+		if request.POST['mpt'] != 'none':
+			mpt_cards = mpt_query(request.POST['mpt'],
 								request.POST['mpt_condition'],
 								request.POST['mpt_parameter'])
-
-		lrb_cards = lrb_query(request.POST['lrb'],request.POST['game_types'])
-		all_text_cards = all_text_query(request.POST['any_text'])
-		type_cards = type_query(request.POST['type_line'])
-
-		all_queries = [name_cards, color_cards, color_identity_cards,
-							rarity_cards, mpt_cards, lrb_cards, 
-							all_text_cards, type_cards]
+		else:
+			mpt_cards = all_cards
+		if request.POST['lrb'] != 'none':
+			lrb_cards = lrb_query(request.POST['lrb'],request.POST['game_types'])
+		else: 
+			lrb_cards = all_cards
+		if request.POST['type_line'] != '':
+			type_cards = type_query(request.POST['type_line'])
+		else:
+			type_cards = all_cards
+		all_queries = [name_cards, color_cards, rarity_cards, mpt_cards,
+						 lrb_cards, type_cards]
 
 		matching_queries = []
 
