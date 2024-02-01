@@ -82,35 +82,35 @@ def search(request):
 				matching_queries.append(query)
 
 		matching_cards = matching_queries[0].intersection(*matching_queries)
-		if cache.get('current_query') == None:
-			cache.add('current_query',matching_cards)
-		else:
-			cache.delete('current_query')
-			cache.add('current_query',matching_cards)
-		# matching_cards_ids = []
-		# for x in matching_cards:
-		# 	matching_cards_ids.append(x.id)
-		# request.session['card_ids'] = matching_cards_ids
+		# if cache.get('current_query') == None:
+		# 	cache.add('current_query',matching_cards)
+		# else:
+		# 	cache.delete('current_query')
+		# 	cache.add('current_query',matching_cards)
+		matching_cards_ids = []
+		for x in matching_cards:
+			matching_cards_ids.append(x.id)
+		request.session['card_ids'] = matching_cards_ids
 		return redirect('cards',page=1)
 
 def card_pages(request,page):
-	# last_page = len(request.session['card_ids'])//60
-	# if page == 1:
-	# 	cards = request.session['card_ids'][:60]
-	# elif page != last_page:
-	# 	cards = request.session['card_ids'][60*page:(60*page)+60]
-	# elif page >=last_page:
-	# 	page = last_page
-	# 	cards = request.session['card_ids'][(60*(last_page-1))+60:]
-	last_page = len(cache.get('current_query'))//60
-	cards = None
+	last_page = len(request.session['card_ids'])//60
 	if page == 1:
-		cards = cache.get('current_query')[:60]
+		cards = request.session['card_ids'][:60]
 	elif page != last_page:
-		cards = cache.get('current_query')[60*page:(60*page)+60]
+		cards = request.session['card_ids'][60*page:(60*page)+60]
 	elif page >=last_page:
 		page = last_page
-		cards = cache.get('current_query')[(60*(last_page-1))+60:]
+		cards = request.session['card_ids'][(60*(last_page-1))+60:]
+	# last_page = len(cache.get('current_query'))//60
+	# cards = None
+	# if page == 1:
+	# 	cards = cache.get('current_query')[:60]
+	# elif page != last_page:
+	# 	cards = cache.get('current_query')[60*page:(60*page)+60]
+	# elif page >=last_page:
+	# 	page = last_page
+	# 	cards = cache.get('current_query')[(60*(last_page-1))+60:]
 	# to_union = []
 	# for x in cards:
 	# 	to_union.append(Card.objects.filter(id=x))
